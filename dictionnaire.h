@@ -10,4 +10,11 @@ typedef struct dico{
 	struct dico * fils;
 }dico_t;
 
+#define TAILLEMAXMOT 100
 
+void insertionFromFile(dico_t *, char *);
+void insertionMot(dico_t *, char *);
+void alloueLettre(dico_t *, char);
+char * affichage(dico_t *);
+
+#endif
