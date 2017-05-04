@@ -21,13 +21,19 @@ char * affichage(dico_t * dico){
 	pile_t pile = initPile(TAILLEMAXMOT);
 	while (!estVide(pile) || ptrDico!=NULL) {
 		while (ptrDico->fils != NULL) {
-			empiler(pile, ptrDico);
+			empiler(&pile, ptrDico);
 			ptrDico = ptrDico->fils;
 		}
+
+/*  */
+
+		res = strcat(res, pileToMot(pile));
 		while (ptrDico = NULL && !estVide(pile)){
-			ptrDico = depiler(pile)->frere;
+			depiler(&pile,&ptrDico);
 		}
 	}
+
+	free_pile(&pile);
 	return res;
 }
 
