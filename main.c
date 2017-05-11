@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "dictionnaire.h"
 #include "rech.h"
+#include "pile.h"
 
 
 int main(){

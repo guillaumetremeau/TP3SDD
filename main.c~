@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dictionnaire.h"
-#include "rech.c"
+<<<<<<< HEAD
+#include "rech.h"
 
+=======
+#include "pile.h"
+>>>>>>> 647b0efbba8aa6e311e6ce8b3b55d9c209685850
 
 int main(){
 	dico_t * dico = NULL;
