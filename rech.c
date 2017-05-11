@@ -1,59 +1,57 @@
-#include <ctype.h>
 
+#include "rech.h"
 
-void Insertion(dico_t * dico, char * mot){
-	int fin = 0;
-	dico_t * ptrDico = &dico;
-	char * ptrMot = &mot;
-	dico_t * res = &dico;
+void insertion(dico_t * ptrDico, char * ptrMot, int * indice)
+{
+	int taille = 0;
+	dico_t ** cour = rechercheMot(ptrDico, ptrMot, &taille);
+	dico_t * tmp = *cour;
+	int i = *indice;
+	*cour = (dico_t*)malloc(sizeof(dico_t));
+	(*cour)->frere = tmp; //chainage sur le frere de l'element que l'on vient d'allouer
+	(*cour)->fils=NULL;
 
-	while(fin = 0){
-		while(*ptrMot != NIL){
-			while((*ptrMot != *ptrDico) && (*ptrDico != NIL)){
-				ptrDico = ptrDico->frere;
-			}		
-			if(tolower(*ptrMot) = tolower(*ptrDico)){		
-				if(ptrMot+1 = NIL){
-					toupper(*ptrDico);		//mettre en majuscule
-					fin = 1;
+	if (mot[i]!=NULL) /* si le mot est vide ou qu'il est déjà dans le dictionnaire */
+	{
+		while (mot[i+1]!=NULL)  //on est pas a la fin donc on insere la lettre en majuscule
+		{
+			(*cour)->lettre = tolower(mot[i]);
+			cour = &((*cour)->fils); //adresse de la case dans laquelle on va stocker le fils
+			*cour = (dico_t*)malloc(sizeof(dico_t)); /* on alloue la taille d'un fils */
+			(*cour)->fils=NULL;
+			(*cour)->frere=NULL;	//on initialise les valeurs a NULL
+			i++; 
+		}
+		(*cour)->lettre=toupper(mot[i]);  //derniere lettre donc on l'ajoute en maj
+	}
+}
+
+dico_t** Recherche(dico_t * ptrDico, char* ptrMot, int * taille)
+{
+	dico_t** cour = &ptrDico;
+	
+	int i=0;
+	while (ptrMot[i]!=NULL && *cour!=NULL && tolower((*cour)->lettre)<=tolower(mot[i]))
+		{
+			if (mot[i+1]==NULL && (*cour)->lettre==mot[i]) //le mot est deja dans le dico
+				{
+					toupper((*cour)->lettre); //mettre en maj la derniere lettre du mot
+					i++; 
 				}
-				else{
-					res = ptrDico;
-					ptrMot = ptrMot+1;
-					ptrDico = ptrDico->fils;
-				}
+			else if ((*cour)->lettre==mot[i])
+			{	
+				i++;
+				cour = &((*cour)->fils);
 			}
-			else{
-				fin = 1;
+			else
+			{
+				cour = &((*cour)->frere);
 			}
 		}
-	}
-
-	ptrDico = res;
-	ptrDico = ptrDico->fils;
-	while(tolower(*ptrDico) < tolower(*ptrMot)){		//comparaison de caractères
-		ptrDico = ptrDico->frere;
-	}
-	while(*ptrMot != NIL){
-		if(ptrMot+1 = NIL){
-			alloueLettre(ptrDico->fils, toupper(*ptrMot)); //derniere lettre a inserer donc maj
-		}
-		else {
-			alloueLettre(ptrDico->fils, tolower(*ptrMot)); //pas derniere lettre donc min
-		}
-		ptrMot = ptrMot+1;
-	}
+		*taille = i;
+		return cour;
 }
 
 
 
-
-
-
-void alloueLettre(dico_t * ptrDico, char Lettre){
-	dico_t * nouvLettre = (dico_t *) malloc(sizeof(dico_t));
-	nouvLettre->lettre = Lettre;
-	nouvLettre->fils = ptrDico;
-	ptrDico = nouvLettre ;
-}
 

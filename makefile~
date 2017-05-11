@@ -12,5 +12,5 @@ main.o: main.c dictionnaire.h
 clean:
 	rm -rf *.o
 
-mrproper: clean
+mrprpoer: clean
 	rm -rf tp3.out
