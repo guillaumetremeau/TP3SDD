@@ -1,10 +1,11 @@
-#ifndef __PILE_H_FARAH_GUILLAUME_
+#ifndef __PILE_H_FARAH_GUILLAUME__
 #define __PILE_H_FARAH_GUILLAUME__
 
 #include <stdlib.h>
 #include <string.h>
+#include "dictionnaire.h"
 
-typedef dico_t * valeur_t;
+typedef struct dico_t *valeur_t;
 
 typedef struct
 {
@@ -87,6 +88,6 @@ int depiler(pile_t *,valeur_t*);
 
 
 
-char * pileToMot(pile_t);
+char * pileToMot(pile_t*);
 
 #endif

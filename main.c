@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dictionnaire.h"
+#include "pile.h"
 
 int main(){
 	dico_t * dico = NULL;

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "pile.h"
 
 typedef struct dico{
 	char lettre;

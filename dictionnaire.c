@@ -2,6 +2,7 @@
 #define __DICTIONNAIRE_C_FARAH_GUILLAUME__
 
 #include "dictionnaire.h"
+#include "pile.h"
 
 void insertionFromFile(dico_t * dico, char * fileName){
 	FILE * file = NULL;
@@ -18,18 +19,18 @@ void insertionFromFile(dico_t * dico, char * fileName){
 char * affichage(dico_t * dico){
 	char * res = "";
 	dico_t * ptrDico = dico;
-	pile_t pile = initPile(TAILLEMAXMOT);
-	while (!estVide(pile) || ptrDico!=NULL) {
+	pile_t pile = init_pile(TAILLEMAXMOT);
+	while (!est_vide(pile) || ptrDico!=NULL) {
 		while (ptrDico->fils != NULL) {
-			empiler(&pile, ptrDico);
+			empiler(&pile, (valeur_t)ptrDico);
 			ptrDico = ptrDico->fils;
 		}
 
 /*  */
 
-		res = strcat(res, pileToMot(pile));
-		while (ptrDico = NULL && !estVide(pile)){
-			depiler(&pile,&ptrDico);
+		res = strcat(res, pileToMot(&pile));
+		while (ptrDico == NULL && !est_vide(pile)){
+			depiler(&pile,(struct dico_t **)&ptrDico);
 		}
 	}
 
@@ -37,5 +38,7 @@ char * affichage(dico_t * dico){
 	return res;
 }
 
+void insertionMot(dico_t * dico, char * mot){
+}
 
 #endif

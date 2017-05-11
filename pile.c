@@ -140,25 +140,25 @@ int depiler(pile_t * p,valeur_t * v){
 }
 
 
-char * pileToMot(pile_t pile){
+char * pileToMot(pile_t * pile){
 	char * res = "";
-	int i;
-	char temp;
-	if(pile != NULL){
-		pile_t *cour = pile;
+	int i = 0;
+	dico_t * dico;
+	if(!(est_vide(*pile))){
 
 		/* Parcours de la pile */
-		while (cour != NULL){
-			res = strcat(res, cour->valeurs);
-			cour = cour->suivant;
+		while (i <= pile->taille){
+			dico =(dico_t *) pile->valeurs[i];
+			res = strcat(res, &dico->lettre);
+			i++;
 		}
 
-		/* Inversion de res */
+		/* Inversion de res  (inutile)
 		for(i = 0; i< strlen(res)/2; i++){
 			temp = res[i];
 			res[i] = res[n-i-1];
 			res[n-i-1] = temp;
-		}
+		}*/
 
 		/* Fin du mot */
 		res = strcat(res,"/n");
