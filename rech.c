@@ -4,25 +4,25 @@
 void insertion(dico_t * ptrDico, char * ptrMot, int * indice)
 {
 	int taille = 0;
-	dico_t ** cour = rechercheMot(ptrDico, ptrMot, &taille);
+	dico_t ** cour = Recherche(ptrDico, ptrMot, &taille);
 	dico_t * tmp = *cour;
 	int i = *indice;
 	*cour = (dico_t*)malloc(sizeof(dico_t));
 	(*cour)->frere = tmp; //chainage sur le frere de l'element que l'on vient d'allouer
 	(*cour)->fils=NULL;
 
-	if (mot[i]!=NULL) /* si le mot est vide ou qu'il est déjà dans le dictionnaire */
+	if (ptrMot[i]!=NULL) /* si le mot est vide ou qu'il est déjà dans le dictionnaire */
 	{
-		while (mot[i+1]!=NULL)  //on est pas a la fin donc on insere la lettre en majuscule
+		while (ptrMot[i+1]!=NULL)  //on est pas a la fin donc on insere la lettre en majuscule
 		{
-			(*cour)->lettre = tolower(mot[i]);
+			(*cour)->lettre = tolower(ptrMot[i]);
 			cour = &((*cour)->fils); //adresse de la case dans laquelle on va stocker le fils
 			*cour = (dico_t*)malloc(sizeof(dico_t)); /* on alloue la taille d'un fils */
 			(*cour)->fils=NULL;
 			(*cour)->frere=NULL;	//on initialise les valeurs a NULL
 			i++; 
 		}
-		(*cour)->lettre=toupper(mot[i]);  //derniere lettre donc on l'ajoute en maj
+		(*cour)->lettre=toupper(ptrMot[i]);  //derniere lettre donc on l'ajoute en maj
 	}
 }
 
