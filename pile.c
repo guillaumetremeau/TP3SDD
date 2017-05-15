@@ -141,9 +141,10 @@ int depiler(pile_t * p,valeur_t * v){
 
 
 char * pileToMot(pile_t * pile){
-	char * res = "";
+	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
 	int i = 0;
 	dico_t * dico;
+	res = "";
 	if(!(est_vide(*pile))){
 
 		/* Parcours de la pile */

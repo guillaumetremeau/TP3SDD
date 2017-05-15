@@ -9,9 +9,9 @@ dico_t* creationDico();
 int main(){
 	dico_t * dictio = creationDico();
 	
-	printf("%c\n", dictio->lettre);
-	printf("%c\n", dictio->lettre);
-	/*printf("%s", affichage(dictio));*/
+	/*printf("%c\n", dictio->lettre);
+	printf("%c\n", dictio->lettre);*/
+	printf("%s", affichage(dictio));
 	/*insertionFromFile(dico,"dictionnaire.txt");*/
 
 	return 0;
