@@ -18,5 +18,7 @@ void insertionFromFile(dico_t *, char *);
 void insertionMot(dico_t *, char *);
 void alloueLettre(dico_t *, char);
 char * affichage(dico_t *);
+char * rechercheFromMotif(dico_t *, char *);
+/*dico_t ** recherche(dico_t *, char *, int *);*/
 
 #endif

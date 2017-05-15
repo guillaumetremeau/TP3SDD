@@ -38,7 +38,20 @@ char * affichage(dico_t * dico){
 	return res;
 }
 
-void insertionMot(dico_t * dico, char * mot){
+/*void insertionMot(dico_t * dico, char * mot){
+}*/
+
+char * rechercheFromMotif(dico_t * dico, char * motif){
+	char* res = "";
+	int i = 0;
+	dico_t * ptrDico = dico;
+/*	dico_t ** resRec = recherche(ptrDico, motif, &i);*/
+/*	res = affichage(*resRec);*/
+	return res;
 }
+
+/*dico_t ** recherche(dico_t * dico, char * chaine, int * taille){
+
+}*/
 
 #endif
