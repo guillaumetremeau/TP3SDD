@@ -8,7 +8,6 @@
 #include "dictionnaire.h"
 
 void Insertion(dico_t *, char *);
-void Recherche(dico_t *, char *, dico_t *, int);
-void alloueLettre(dico_t *, char);
+dico_t** Recherche(dico_t *, char *, int *);
 
 #endif
