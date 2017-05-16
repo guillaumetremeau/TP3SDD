@@ -17,9 +17,10 @@ void insertionFromFile(dico_t * dico, char * fileName){
 }
 
 char * affichage(dico_t * dico){
-	char * res = "";
+	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
 	dico_t * ptrDico = dico;
 	pile_t pile = init_pile(TAILLEMAXMOT);
+	res ="";
 	while (!est_vide(pile) || ptrDico!=NULL) {
 		while (ptrDico->fils != NULL) {
 			empiler(&pile, (valeur_t)ptrDico);
@@ -64,7 +65,7 @@ void insertionMot(dico_t * dico, char * mot)
 }
 
 char * rechercheFromMotif(dico_t * dico, char * motif){
-	char* res = "";
+	char* res = (char *) malloc(TAILLEMAXMOT*sizeof(char));
 	int i = 0;
 	dico_t * ptrDico = dico;
 /*	dico_t ** resRec = recherche(ptrDico, motif, &i);*/

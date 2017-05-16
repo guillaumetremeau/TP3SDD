@@ -149,7 +149,14 @@ char * pileToMot(pile_t * pile){
 		/* Parcours de la pile */
 		while (i <= pile->taille){
 			dico =(dico_t *) pile->valeurs[i];
-			res = strcat(res, &dico->lettre);
+			printf("%d",(int)strlen(&dico->lettre));
+			scanf("%s",res);
+			size_t t=strlen(res);
+			res[t+1]='\0';
+			res[t]=&dico->lettre;
+			/*res = strcat(res, &dico->lettre);*/
+			printf("%s",res);
+			scanf("%s",res);
 			i++;
 		}
 

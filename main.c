@@ -16,6 +16,9 @@ int main(){
 	printf("%c\n", (*res)->lettre);
 	/*insertionMot(dictio, "aba");
 	printf("%d - %c\n", dictio->fils->fils->lettre, dictio->fils->fils->lettre);*/
+	/*printf("%c\n", dictio->lettre);
+	printf("%c\n", dictio->lettre);*/
+/*	printf("%s", affichage(dictio));*/
 	/*insertionFromFile(dico,"dictionnaire.txt");*/
 
 	return 0;
