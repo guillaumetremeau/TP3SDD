@@ -8,10 +8,14 @@ dico_t* creationDico();
 
 int main(){
 	dico_t * dictio = creationDico();
+	printf("ca va\n");
+	int i = 0;
+	dico_t ** res = Recherche(dictio, "abou", &i); 
+	printf("ca va toujours\n");
 	
-	printf("%c\n", dictio->lettre);
-	printf("%c\n", dictio->lettre);
-	/*printf("%s", affichage(dictio));*/
+	printf("%c\n", (*res)->lettre);
+	/*insertionMot(dictio, "aba");
+	printf("%d - %c\n", dictio->fils->fils->lettre, dictio->fils->fils->lettre);*/
 	/*insertionFromFile(dico,"dictionnaire.txt");*/
 
 	return 0;

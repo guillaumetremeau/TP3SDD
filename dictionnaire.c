@@ -75,27 +75,40 @@ char * rechercheFromMotif(dico_t * dico, char * motif){
 dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 {
 	dico_t** cour = &dico;
-	
+	//dico_t** prec = &cour;
+	printf("%c\n", (*cour)->lettre);
+	printf("%p\n", *prec);
 	int i=0;
-	while (mot[i]!='\0' && *cour!='\0' && tolower((*cour)->lettre)<=tolower(mot[i]))
+
+	while (mot[i]!='\0' && *cour!=NULL && (*cour)->lettre!='\0' && tolower((*cour)->lettre)<=tolower(mot[i]))
+	{
+		if (mot[i+1]=='\0' && (*cour)->lettre==mot[i]) /*le mot est deja dans le dico*/
 		{
-			if (mot[i+1]=='\0' && (*cour)->lettre==mot[i]) /*le mot est deja dans le dico*/
-				{
-					(*cour)->lettre = toupper((*cour)->lettre); /*mettre en maj la derniere lettre du mot*/
-					i++; 
-				}
-			else if ((*cour)->lettre==mot[i])
-			{	
-				i++;
-				cour = &((*cour)->fils);
-			}
-			else
-			{
-				cour = &((*cour)->frere);
-			}
+			//*prec = (*cour)->lettre;
+			(*cour)->lettre = toupper((*cour)->lettre); /*mettre en maj la derniere lettre du mot*/
+			i++; 
+			printf("cas1\n");
 		}
-		*taille = i;
-		return cour;
+		else if ((*cour)->lettre==mot[i])
+		{	
+			i++;
+			//*prec = (*cour)->lettre;
+			*cour = (*cour)->fils;
+			printf("cas2\n");
+		}
+		else
+		{
+			//(*prec) = (*cour)->lettre;
+			*cour = (*cour)->frere;
+			printf("cas3\n");
+		}
+		printf("%p\n", *prec);
+		printf("%d\n", i);
+	}
+	printf("ca marche\n");
+	taille = i;
+	printf("%c\n", (*prec)->lettre);
+	return cour;
 }
 
 

@@ -1,7 +1,7 @@
 all: tp3
 
 tp3: dictionnaire.o pile.o main.o 
-	gcc -o tp3.out dictionnaire.o pile.o main.o
+	gcc -o tp3.out -g dictionnaire.o pile.o main.o
 
 dictionnaire.o: dictionnaire.c
 	gcc -o dictionnaire.o -c dictionnaire.c -Wall -Wextra -ansi -pedantic
