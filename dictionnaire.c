@@ -44,7 +44,7 @@ void insertionMot(dico_t * dico, char * mot)
 	int taille = 0;
 	dico_t ** cour = Recherche(dico, mot, &taille);
 	dico_t * tmp = *cour;
-	int i = 2;	/*probleme de la taille a regler*/
+	int i = taille;	/*probleme de la taille a regler*/
 	printf("%d\n", taille);
 
 	*cour = (dico_t*)malloc(sizeof(dico_t));
@@ -101,7 +101,7 @@ dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 			*cour = (*cour)->frere;
 		}
 	}
-	taille = i;
+	*taille = i;
 	printf("%c\n", (*prec)->lettre);
 	printf("%d\n", taille);
 	return prec;

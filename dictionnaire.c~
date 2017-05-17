@@ -101,7 +101,7 @@ dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 			*cour = (*cour)->frere;
 		}
 	}
-	taille = &i;
+	*taille = i;
 	printf("%c\n", (*prec)->lettre);
 	printf("%d\n", taille);
 	return prec;
