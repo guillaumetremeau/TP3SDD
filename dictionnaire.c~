@@ -4,33 +4,79 @@
 #include "dictionnaire.h"
 #include "pile.h"
 
-void insertionFromFile(dico_t * dico, char * fileName){
+
+/* ---------------------------------------------------
+ *
+ *              INSERTIONFROMFILE
+ *
+ * Insère les mots d'un fichier texte entré en 
+ * paramètre dans le dictionnaire
+ * 
+ *
+ * Lexique :
+ *  - dico : dictionnaire 
+ *  - fileName : fichier qui contient les mots
+ *  - chaine : contient les mots du fichier
+ *  - file : fichier que l'on peut lire
+ *
+ *
+ * --------------------------------------------------- */
+
+void insertionFromFile(dico_t * dico, char * filename)	
+{
 	FILE * file = NULL;
-	char * chaine = "";
-	file = fopen(fileName, "r");
-	if (file != NULL){
-		while(fgets(chaine, TAILLEMAXMOT, file) != NULL){
-			insertionMot(dico, chaine);
+	char chaine[TAILLEMAXMOT]= "";
+	file = fopen(filename, "r");
+	if (file != NULL)
+	{
+		while(fgets(chaine, TAILLEMAXMOT, file) != NULL)
+		{
+			printf("%s", chaine);
+			insertionMot(dico, chaine);		/*probleme MAJ pour derniere lettre ne fonctionne pas*/
 		}
 		fclose(file);
-	}else printf("erreur à l'ouverture du fichier");
+	}
+	else
+	{
+		printf("erreur à l'ouverture du fichier");
+	}
 }
 
+
+/* ---------------------------------------------------
+ *
+ *              AFFICHAGE
+ *
+ * 
+ *
+ * Lexique :
+ *  - 
+ *  - 
+ *  - 
+ *
+ * Retour :
+ *  - 
+ * --------------------------------------------------- */
+
 char * affichage(dico_t * dico){
+	printf("debut aff\n");
 	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
 	dico_t * ptrDico = dico;
 	pile_t pile = init_pile(TAILLEMAXMOT);
 	res ="";
 	while (!est_vide(pile) || ptrDico!=NULL) {
+		printf("boucle1\n");
 		while (ptrDico->fils != NULL) {
+			printf("boucle2\n");
+			printf("%c\n", ptrDico->lettre);
 			empiler(&pile, (valeur_t)ptrDico);
 			ptrDico = ptrDico->fils;
 		}
-
-/*  */
-
+		printf("sortieboucle\n");
 		res = strcat(res, pileToMot(&pile));
+		printf("%s\n", res);
 		while (ptrDico == NULL && !est_vide(pile)){
+			printf("boucle3\n");
 			depiler(&pile,(struct dico_t **)&ptrDico);
 		}
 	}
@@ -39,13 +85,26 @@ char * affichage(dico_t * dico){
 	return res;
 }
 
+
+/* ---------------------------------------------------
+ *
+ *              INSERTIONMOT
+ *
+ * Insert un mot entré en paramètre dans le dictionnaire
+ *
+ * Lexique :
+ *  - dico : dictionnaire
+ *  - mot : mot à insérer
+ *  - taille : 
+ *
+ * --------------------------------------------------- */
+
 void insertionMot(dico_t * dico, char * mot)
 {
 	int taille = 0;
 	dico_t ** cour = Recherche(dico, mot, &taille);
 	dico_t * tmp = *cour;
-	int i = 2;	/*probleme de la taille a regler*/
-	printf("%d\n", taille);
+	int i = taille;
 
 	*cour = (dico_t*)malloc(sizeof(dico_t));
 	tmp->frere = *cour; /*chainage sur le frere de l'element que l'on vient d'allouer*/
@@ -70,10 +129,27 @@ char * rechercheFromMotif(dico_t * dico, char * motif){
 	char* res = (char *) malloc(TAILLEMAXMOT*sizeof(char));
 	int i = 0;
 	dico_t * ptrDico = dico;
-/*	dico_t ** resRec = recherche(ptrDico, motif, &i);*/
-/*	res = affichage(*resRec);*/
+	/*dico_t ** resRec = recherche(ptrDico, motif, &i);
+	res = affichage(*resRec);*/
 	return res;
 }
+
+
+/* ---------------------------------------------------
+ *
+ *              RECHERCHE
+ *
+ * Recherche 
+ *
+ * Lexique :
+ *  - dico : dictionnaire
+ *  - mot : mot à rechercher
+ *  - taille :
+ *
+ * Retour :
+ *  - taille
+ *  - prec
+ * --------------------------------------------------- */
 
 dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 {
@@ -102,8 +178,6 @@ dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 		}
 	}
 	*taille = i;
-	printf("%c\n", (*prec)->lettre);
-	printf("%d\n", taille);
 	return prec;
 }
 

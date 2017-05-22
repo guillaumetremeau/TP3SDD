@@ -9,17 +9,26 @@ dico_t* creationDico();
 int main(){
 	dico_t * dictio = creationDico();
 	printf("ca va\n");
-	/*int i = 0;
-	dico_t ** res = Recherche(dictio, "abou", &i); 		Verification fonction rech
-	printf("%c\n", (*res)->lettre);*/
+
+	/*verification fonction recherche
+	int i = 0;
+	dico_t ** res = Recherche(dictio, "abou", &i);
+	printf("%c\n", (*res)->lettre);
+	*/
 	
-	
+	/*test insertion d'un mot dans le dictionnaire
 	insertionMot(dictio, "abba");
 	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-	/*printf("%c\n", dictio->lettre);
-	printf("%c\n", dictio->lettre);*/
-/*	printf("%s", affichage(dictio));*/
-	/*insertionFromFile(dico,"dictionnaire.txt");*/
+	*/	
+
+	/*test insertion d'un mot a partir d'un fichier
+	insertionFromFile(dictio, "dico.txt");
+	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+	*/
+
+	/*test fonction affichage
+	affichage(dictio);
+	*/
 
 	printf("ca va toujours\n");
 

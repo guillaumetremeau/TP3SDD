@@ -15,11 +15,62 @@ typedef struct dico{
 
 #define TAILLEMAXMOT 100
 
+
+/* ---------------------------------------------------
+ *
+ *              INSERTIONFROMFILE
+ *
+ * Insère les mots d'un fichier texte entré en 
+ * paramètre dans le dictionnaire
+ *
+ * --------------------------------------------------- */
+
 void insertionFromFile(dico_t *, char *);
+
+/* ---------------------------------------------------
+ *
+ *              INSERTIONMOT
+ *
+ * Insert un mot entré en paramètre dans le dictionnaire
+ *
+ * --------------------------------------------------- */
+
 void insertionMot(dico_t *, char *);
-void alloueLettre(dico_t *, char);
+
+/* ---------------------------------------------------
+ *
+ *              AFFICHAGE
+ *
+ * 
+ * --------------------------------------------------- */
+
 char * affichage(dico_t *);
-char * rechercheFromMotif(dico_t *, char *);
+
+
+/* ---------------------------------------------------
+ *
+ *              RECHERCHEFROMMOTIF
+ *
+ * 
+ * --------------------------------------------------- */
+
+/*char * rechercheFromMotif(dico_t *, char *);*/
+
+/* ---------------------------------------------------
+ *
+ *              RECHERCHE
+ *
+ * Recherche l'adresse de la dernière lettre commune
+ * entre le mot et le dictionnaire et renvoie 
+ * l'adresse de l'élément où il faut insérer le mot
+ *
+ * Retour :
+ *  - taille : nb de charactères du mot qui sont déjà 
+ * dans le dictionnaire
+ *  - prec : adresse de l'élément à la suite duquel on 
+ * peut insérer la suite du mot
+ * --------------------------------------------------- */
+
 dico_t ** Recherche(dico_t *, char *, int *);
 
 #endif

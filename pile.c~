@@ -145,8 +145,10 @@ char * pileToMot(pile_t * pile){
 	int i = 0;
 	dico_t * dico;
 	if(!(est_vide(*pile))){
+		printf("boucle1\n");
 		/* Parcours de la pile */
 		while (i <= pile->taille){
+			printf("boucle2\n");
 			dico =(dico_t *) pile->valeurs[i];
 			printf("%d",(int)strlen(&dico->lettre));
 			scanf("%s",res);
