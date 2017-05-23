@@ -16,18 +16,19 @@ int main(){
 	printf("%c\n", (*res)->lettre);
 	*/
 	
-	/*test insertion d'un mot dans le dictionnaire
+	/*test insertion d'un mot dans le dictionnaire*/
 	insertionMot(dictio, "abba");
 	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-	*/	
+		
 
-	/*test insertion d'un mot a partir d'un fichier
+	/*test insertion d'un mot a partir d'un fichier*/
 	insertionFromFile(dictio, "dico.txt");
 	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-	*/
+	
 
-	/*test fonction affichage*/
+	/*test fonction affichage
 	affichage(dictio);
+	*/
 
 	printf("ca va toujours\n");
 

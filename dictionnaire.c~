@@ -27,11 +27,16 @@ void insertionFromFile(dico_t * dico, char * filename)
 	FILE * file = NULL;
 	char chaine[TAILLEMAXMOT]= "";
 	file = fopen(filename, "r");
+	int i = 0;
 	if (file != NULL)
 	{
 		while(fgets(chaine, TAILLEMAXMOT, file) != NULL)
 		{
-			printf("%s", chaine);
+    			while(chaine[i]!='\n')
+    			{
+				i=i+1;
+			}
+			chaine[i]='\0';
 			insertionMot(dico, chaine);		/*probleme MAJ pour derniere lettre ne fonctionne pas*/
 		}
 		fclose(file);
@@ -139,16 +144,20 @@ char * rechercheFromMotif(dico_t * dico, char * motif){
  *
  *              RECHERCHE
  *
- * Recherche 
+ * Recherche l'adresse de la dernière lettre commune
+ * entre le mot et le dictionnaire et renvoie 
+ * l'adresse de l'élément où il faut insérer le mot
  *
  * Lexique :
  *  - dico : dictionnaire
  *  - mot : mot à rechercher
- *  - taille :
+ *  - taille
  *
  * Retour :
- *  - taille
- *  - prec
+ *  - taille : nb de charactères du mot qui sont déjà 
+ * dans le dictionnaire
+ *  - prec : adresse de l'élément à la suite duquel on 
+ * peut insérer la suite du mot
  * --------------------------------------------------- */
 
 dico_t** Recherche(dico_t * dico, char* mot, int * taille)

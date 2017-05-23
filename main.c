@@ -21,10 +21,10 @@ int main(){
 	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
 	*/	
 
-	/*test insertion d'un mot a partir d'un fichier
+	/*test insertion d'un mot a partir d'un fichier*/
 	insertionFromFile(dictio, "dico.txt");
 	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-	*/
+	
 
 	/*test fonction affichage
 	affichage(dictio);

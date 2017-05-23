@@ -27,12 +27,17 @@ void insertionFromFile(dico_t * dico, char * filename)
 	FILE * file = NULL;
 	char chaine[TAILLEMAXMOT]= "";
 	file = fopen(filename, "r");
+	int i = 0;
 	if (file != NULL)
 	{
 		while(fgets(chaine, TAILLEMAXMOT, file) != NULL)
 		{
-			printf("%s", chaine);
-			insertionMot(dico, chaine);		/*probleme MAJ pour derniere lettre ne fonctionne pas*/
+    			while(chaine[i]!='\n')
+    			{
+				i=i+1;
+			}
+			chaine[i]='\0';			/*changer le dernier caractère \n en \0 pour le mettre en maj dans insertionMot*/
+			insertionMot(dico, chaine);		
 		}
 		fclose(file);
 	}
