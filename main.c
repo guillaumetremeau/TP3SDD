@@ -7,37 +7,14 @@
 dico_t* creationDicoPlein();
 dico_t* creationDicoVide();
 
-int main(){
-	dico_t * dictioP = creationDicoPlein();
-	dico_t * dictioV = creationDicoVide();
-	printf("ca va\n");
 
-	/*RechDicoExistant(dictioP);*/
-
-	/*RechDicoVide(dictioV);*/
-	
-	/*insertionMotDicoExistant(dictioP);*/
-
-	/*insertionMotDicoVide(dictioV);*/
-
-	/*insertionFromFileDicoPlein(dictioP);*/
-
-	/*insertionFromFileDicoVide(dictioV);*/
-
-	/*insertionFromFileFileVide(dictioP);*/
-
-	/*affichageDicoPlein(dictioP);*/
-
-	/*affichageDicoVide(dictioV);*/
-
-	printf("ca va toujours\n");
-
-	return 0;
+void affichageDicoPlein(dico_t * dictio){
+	printf("%s\n", affichage(dictio));
 }
 
-void affichageDicoPlein(dico_t * dictio){}
-
-void affichageDicoVide(dico_t * dictio){}
+void affichageDicoVide(dico_t * dictio){
+	printf("%s\n", affichage(dictio));
+}
 
 void insertionFromFileFileVide(dico_t * dictio){
 	insertionFromFile(dictio, "dico.txt");
@@ -78,14 +55,16 @@ dico_t * creationDicoVide(){
 	dictio->lettre = 'a';
 	dictio->frere = NULL;
 	dictio->fils = NULL;
+
+	return dictio;
 }
 
 dico_t* creationDicoPlein(){
-	dico_t * fils1;	
-	dico_t * fils2;	
-	dico_t * fils3;	
+	dico_t * fils1;
+	dico_t * fils2;
+	dico_t * fils3;
 	dico_t * frere2;
-	dico_t * fils4;	
+	dico_t * fils4;
 	dico_t * fils5;
 	dico_t * frere1;
 	dico_t * fils6;
@@ -154,4 +133,33 @@ dico_t* creationDicoPlein(){
 	fils8->fils = NULL;
 
 	return(dictio);
+}
+
+
+int main(){
+	dico_t * dictioP = creationDicoPlein();
+	dico_t * dictioV = creationDicoVide();
+	printf("ca va\n");
+
+	/*RechDicoExistant(dictioP);*/
+
+	/*RechDicoVide(dictioV);*/
+
+	/*insertionMotDicoExistant(dictioP);*/
+
+	/*insertionMotDicoVide(dictioV);*/
+
+	/*insertionFromFileDicoPlein(dictioP);*/
+
+	/*insertionFromFileDicoVide(dictioV);*/
+
+	/*insertionFromFileFileVide(dictioP);*/
+
+	affichageDicoPlein(dictioP);
+
+	/*affichageDicoVide(dictioV);*/
+
+	printf("ca va toujours\n");
+
+	return 0;
 }

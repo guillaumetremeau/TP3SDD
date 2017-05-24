@@ -88,7 +88,7 @@ int est_vide(pile_t p){
  * Lexique :
  *  - p : adresse de la tete de la pile (entree/sortie)
  *  - v : valeur a ajouter dans la pile (entree)
- *  - erreur : entier vallant 0 si l'empilage a pu 
+ *  - erreur : entier vallant 0 si l'empilage a pu
  *             etre fait, 1 sinon (sortie)
  *
  * Retour :
@@ -112,10 +112,10 @@ int empiler(pile_t * p,valeur_t v){
  *
  *              DEPILER
  *
- * Depile la premiere valeure de la pile passee en 
+ * Depile la premiere valeure de la pile passee en
  * parametre dans l'adresse egalement passee en
  * parametre.
- * 
+ *
  *
  * Lexique :
  *  - p : adresse de la tete de la pile (entree/sortie)
@@ -143,6 +143,7 @@ int depiler(pile_t * p,valeur_t * v){
 char * pileToMot(pile_t * pile){
 	char * res = "";
 	int i = 0;
+  size_t t;
 	dico_t * dico;
 	if(!(est_vide(*pile))){
 		/* Parcours de la pile */
@@ -150,7 +151,7 @@ char * pileToMot(pile_t * pile){
 			dico =(dico_t *) pile->valeurs[i];
 			printf("%d",(int)strlen(&dico->lettre));
 			scanf("%s",res);
-			size_t t = strlen(res);
+			t = strlen(res);
 			res[t+1] ='\0';
 			res[t] = &dico->lettre;
 			/*res = strcat(res, &dico->lettre);*/
@@ -171,5 +172,3 @@ char * pileToMot(pile_t * pile){
 	}
 	return res;
 }
-
-

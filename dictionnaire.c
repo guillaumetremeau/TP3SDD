@@ -9,12 +9,12 @@
  *
  *              INSERTIONFROMFILE
  *
- * Insère les mots d'un fichier texte entré en 
+ * Insère les mots d'un fichier texte entré en
  * paramètre dans le dictionnaire
- * 
+ *
  *
  * Lexique :
- *  - dico : dictionnaire 
+ *  - dico : dictionnaire
  *  - fileName : fichier qui contient les mots
  *  - chaine : contient les mots du fichier
  *  - file : fichier que l'on peut lire
@@ -22,12 +22,13 @@
  *
  * --------------------------------------------------- */
 
-void insertionFromFile(dico_t * dico, char * filename)	
+void insertionFromFile(dico_t * dico, char * filename)
 {
 	FILE * file = NULL;
 	char chaine[TAILLEMAXMOT]= "";		/*chaine qui va contenir les mots du fichier*/
-	file = fopen(filename, "r");		/*ouvrir le fichier*/
 	int i = 0;
+	file = fopen(filename, "r");		/*ouvrir le fichier*/
+
 	if (file != NULL)			/*si le fichier existe*/
 	{
 		while(fgets(chaine, TAILLEMAXMOT, file) != NULL)	/*tant qu'il y a un mot dans le fichier*/
@@ -52,23 +53,23 @@ void insertionFromFile(dico_t * dico, char * filename)
  *
  *              AFFICHAGE
  *
- * 
+ *
  *
  * Lexique :
- *  - 
- *  - 
- *  - 
+ *  -
+ *  -
+ *  -
  *
  * Retour :
- *  - 
+ *  -
  * --------------------------------------------------- */
 
 char * affichage(dico_t * dico){
-	printf("debut aff\n");
 	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
 	dico_t * ptrDico = dico;
 	pile_t pile = init_pile(TAILLEMAXMOT);
 	res ="";
+	printf("debut aff\n");
 	while (!est_vide(pile) || ptrDico!=NULL) {
 		printf("boucle1\n");
 		while (ptrDico->fils != NULL) {
@@ -100,7 +101,7 @@ char * affichage(dico_t * dico){
  * Lexique :
  *  - dico : dictionnaire
  *  - mot : mot à insérer
- *  - taille : 
+ *  - taille :
  *
  * --------------------------------------------------- */
 
@@ -125,7 +126,7 @@ void insertionMot(dico_t * dico, char * mot)			/*probleme avec premiere lettre*/
 			*cour = (dico_t*)malloc(sizeof(dico_t)); 	/* on alloue la taille d'un fils */
 			(*cour)->fils = NULL;
 			(*cour)->frere = NULL;		/*on initialise les valeurs a NULL*/
-			i++; 
+			i++;
 		}
 		(*cour)->lettre = toupper(mot[i]);  	/*derniere lettre donc on l'ajoute en majuscule*/
 	}
@@ -135,15 +136,15 @@ void insertionMot(dico_t * dico, char * mot)			/*probleme avec premiere lettre*/
  *
  *              RECHERCHEFROMMOTIF
  *
- * 
+ *
  *
  * Lexique :
- *  - 
- *  - 
- *  - 
+ *  -
+ *  -
+ *  -
  *
  * Retour :
- *  - 
+ *  -
  * --------------------------------------------------- */
 
 char * rechercheFromMotif(dico_t * dico, char * motif){
@@ -161,7 +162,7 @@ char * rechercheFromMotif(dico_t * dico, char * motif){
  *              RECHERCHE
  *
  * Recherche l'adresse de la dernière lettre commune
- * entre le mot et le dictionnaire et renvoie 
+ * entre le mot et le dictionnaire et renvoie
  * l'adresse de l'élément où il faut insérer le mot
  *
  * Lexique :
@@ -170,16 +171,16 @@ char * rechercheFromMotif(dico_t * dico, char * motif){
  *  - taille
  *
  * Retour :
- *  - taille : nb de charactères du mot qui sont déjà 
+ *  - taille : nb de charactères du mot qui sont déjà
  * dans le dictionnaire
- *  - prec : adresse de l'élément à la suite duquel on 
+ *  - prec : adresse de l'élément à la suite duquel on
  * peut insérer la suite du mot
  * --------------------------------------------------- */
 
 dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 {
 	dico_t** cour = &dico;		/*cour prend l'adresse de dico*/
-	dico_t** prec = *cour;		/*prec prend l'adresse de cour*/
+	dico_t** prec = (dico_t**) *cour;		/*prec prend l'adresse de cour*/
 	int i=0;
 
 	while (mot[i]!='\0' && *cour!=NULL && (*cour)->lettre!='\0' && tolower((*cour)->lettre)<=tolower(mot[i]))	/* tant qu'on est pas à la fin du mot, que l'adresse du cour est différent de NULL, que la valeur pointée par cour est différente de NULL et que la lettre pointee par cour est inferieure à celle du mot*/
@@ -188,10 +189,10 @@ dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 		{
 			(*cour)->lettre = toupper((*cour)->lettre); /*mettre en maj la derniere lettre du mot*/
 			*prec = *cour;
-			i++; 
+			i++;
 		}
 		else if ((*cour)->lettre==mot[i])
-		{	
+		{
 			i++;
 			*prec = *cour;
 			*cour = (*cour)->fils;
