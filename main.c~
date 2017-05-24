@@ -4,38 +4,83 @@
 #include "rech.h"
 #include "pile.h"
 
-dico_t* creationDico();
+dico_t* creationDicoPlein();
+dico_t* creationDicoVide();
 
 int main(){
-	dico_t * dictio = creationDico();
+	dico_t * dictioP = creationDicoPlein();
+	dico_t * dictioV = creationDicoVide();
 	printf("ca va\n");
 
-	/*verification fonction recherche
-	int i = 0;
-	dico_t ** res = Recherche(dictio, "abou", &i);
-	printf("%c\n", (*res)->lettre);
-	*/
-	
-	/*test insertion d'un mot dans le dictionnaire*/
-	insertionMot(dictio, "abba");
-	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-		
+	/*RechDicoExistant(dictioP);*/
 
-	/*test insertion d'un mot a partir d'un fichier*/
-	insertionFromFile(dictio, "dico.txt");
-	printf("%c - %c\n", dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+	/*RechDicoVide(dictioV);*/
 	
+	/*insertionMotDicoExistant(dictioP);*/
 
-	/*test fonction affichage
-	affichage(dictio);
-	*/
+	/*insertionMotDicoVide(dictioV);*/
+
+	/*insertionFromFileDicoPlein(dictioP);*/
+
+	/*insertionFromFileDicoVide(dictioV);*/
+
+	insertionFromFileFileVide(dictioP);
+
+	/*affichageDicoPlein(dictioP);*/
+
+	/*affichageDicoVide(dictioV);*/
 
 	printf("ca va toujours\n");
 
 	return 0;
 }
 
-dico_t* creationDico(){
+void affichageDicoPlein(dico_t * dictio){}
+
+void affichageDicoVide(dico_t * dictio){}
+
+void insertionFromFileFileVide(dico_t * dictio){
+	insertionFromFile(dictio, "dico.txt");
+	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+}
+
+void insertionFromFileDicoVide(dico_t * dictio){
+	insertionFromFile(dictio, "dico.txt");
+	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+}
+
+void insertionFromFileDicoPlein(dico_t * dictio){
+	insertionFromFile(dictio, "dico.txt");
+	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+}
+
+void insertionMotDicoExistant(dico_t * dictio){
+	insertionMot(dictio, "abba");
+	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
+}
+
+void RechDicoExistant(dico_t * dictio){
+	int i = 0;
+	char * mot = "abi";
+	dico_t ** res = Recherche(dictio, mot, &i);
+	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
+}
+
+void RechDicoVide(dico_t * dictio){
+	int i = 0;
+	char * mot = "abi";
+	dico_t ** res = Recherche(dictio, mot, &i);
+	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
+}
+
+dico_t * creationDicoVide(){
+	dico_t * dictio = (dico_t *) malloc(sizeof(dico_t));
+	dictio->lettre = 'a';
+	dictio->frere = NULL;
+	dictio->fils = NULL;
+}
+
+dico_t* creationDicoPlein(){
 	dico_t * fils1;	
 	dico_t * fils2;	
 	dico_t * fils3;	
