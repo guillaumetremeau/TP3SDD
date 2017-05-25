@@ -155,7 +155,7 @@ int main(){
 
 	/*insertionFromFileFileVide(dictioP);*/
 
-	/*affichageDicoPlein(dictioP);*/
+	affichageDicoPlein(dictioP);
 
 	/*affichageDicoVide(dictioV);*/
 

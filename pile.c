@@ -139,33 +139,33 @@ int depiler(pile_t * p,valeur_t * v){
   return erreur;
 }
 
-
+/* ---------------------------------------------------
+ *
+ *              PILETOMOT
+ *
+ * Parcours la pile actuelle pour en récupérer le mot.
+ *
+ *
+ * Lexique :
+ *  - res : chaine contenant le mot à retourer
+ *  - i : itérateur de parcours de la pile et de res
+ *  - dico :  variable récupérant l'élément situé dans la pile
+ *
+ * Retour :
+ *  - res
+ * --------------------------------------------------- */
 char * pileToMot(pile_t * pile){
 	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
 	int i;
-  int t;
 	dico_t * dico;
   i = 0;
-  /*res = "";*/
 	if(!(est_vide(*pile))){
 		/* Parcours de la pile */
 		while (i <= pile->curseur){
 			dico =(dico_t *) pile->valeurs[i];
-			t = (int)strlen(res);
-			res[t] = dico->lettre;
-			/*res = strcat(res, &dico->lettre);*/
+			res[i] = dico->lettre;
 			i = i+1;
 		}
-    t = (int)strlen(res);
-    res[t+1] ='\0';
-
-		/* Inversion de res  (inutile)
-		for(i = 0; i< strlen(res)/2; i++){
-			temp = res[i];
-			res[i] = res[n-i-1];
-			res[n-i-1] = temp;
-		}*/
-
 		/* Fin du mot */
 	}
 	return res;

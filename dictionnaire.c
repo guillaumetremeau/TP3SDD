@@ -53,38 +53,38 @@ void insertionFromFile(dico_t * dico, char * filename)
  *
  *              AFFICHAGE
  *
- *
+ * Affiche la liste des mots contenus dans un dictionnaire
  *
  * Lexique :
- *  -
- *  -
- *  -
+ *  - res : Chaine à retourner
+ *  - ptrDico : Pointeur sur l'élément courant du dico
+ *  - pile : pile d'élément de l'arbre
  *
- * Retour :
+ * Retour : Chaine de caractère contenant la liste des mots
  *  -
  * --------------------------------------------------- */
 
 char * affichage(dico_t * dico){
-	char * res = (char *)malloc(TAILLEMAXMOT*1000*sizeof(char));
+	char * res = (char *)malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
 	dico_t * ptrDico = dico;
 	pile_t pile = init_pile(TAILLEMAXMOT);
-	while (!est_vide(pile) || ptrDico!=NULL) {
+	while (!est_vide(pile) || ptrDico!=NULL) {/*On parcours tant qu'il reste des mots à parcourir dans le dictionnaire */
 		while (ptrDico->fils != NULL) {
 			empiler(&pile, (valeur_t)ptrDico);
-			if (ptrDico->lettre >='A' && ptrDico->lettre <='Z') {/*Si c'est une majuscule*/
+			if (ptrDico->lettre >='A' && ptrDico->lettre <='Z') {/*Si c'est une majuscule on écrit le mot */
 				res = strcat(res, pileToMot(&pile));
 				res = strcat(res, "\n");
 			}
 			ptrDico = ptrDico->fils;
 		}
-		empiler(&pile, (valeur_t)ptrDico);
+		empiler(&pile, (valeur_t)ptrDico);/* On oubli pas de traiter le dernier fils d'une branche de l'arbre */
 		res = strcat(res, pileToMot(&pile));
 		res = strcat(res, "\n");
 
-		while (ptrDico->frere == NULL && !est_vide(pile)){
+		while (ptrDico->frere == NULL && !est_vide(pile)){/* On dépile jusqu'à retrouver un frêre */
 			depiler(&pile,(struct dico_t **)&ptrDico);
 		}
-		if (ptrDico->frere != NULL){
+		if (ptrDico->frere != NULL){ /*Si un frere est retrouvé, on continue le parcours à partir de lui */
 			ptrDico = ptrDico->frere;
 		}else{
 			ptrDico = NULL;

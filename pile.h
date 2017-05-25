@@ -76,7 +76,7 @@ int empiler(pile_t *,valeur_t);
  *
  *              DEPILER
  *
- * Depile la premiere valeure de la pile passee en 
+ * Depile la premiere valeure de la pile passee en
  * parametre dans l'adresse egalement passee en
  * parametre.
  *
@@ -87,7 +87,13 @@ int empiler(pile_t *,valeur_t);
 int depiler(pile_t *,valeur_t*);
 
 
-
+/* ---------------------------------------------------
+ *
+ *              PILETOMOT
+ *
+ * Parcours la pile actuelle pour en récupérer le mot.
+ *
+ * --------------------------------------------------- */
 char * pileToMot(pile_t*);
 
 #endif
