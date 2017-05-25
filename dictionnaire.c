@@ -140,23 +140,29 @@ void insertionMot(dico_t * dico, char * mot)			/*probleme avec premiere lettre*/
  *
  *              RECHERCHEFROMMOTIF
  *
- *
+ * Affiche les mots du dictionnaire possedant un motif
+ * donné
  *
  * Lexique :
- *  -
- *  -
- *  -
+ *  - res : chaine contenant le résultat de l'affichage
+ *  basé sur le motif
+ *  - i : indication de taille pour la recherche
+ *  - ptrDico : pointeur  sur le dictionnaire
+ *  - resRec : résultat de la recherche du motif
  *
  * Retour :
- *  -
+ *  - res
  * --------------------------------------------------- */
 
 char * rechercheFromMotif(dico_t * dico, char * motif){
-	char* res = (char *) malloc(TAILLEMAXMOT*sizeof(char));
+	char* res = (char *) malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
 	int i = 0;
 	dico_t * ptrDico = dico;
-	/*dico_t ** resRec = recherche(ptrDico, motif, &i);
-	res = affichage(*resRec);*/
+	dico_t ** resRec = Recherche(ptrDico, motif, &i);
+	if ((*resRec)->fils != NULL) {
+		res = affichage((*resRec)->fils);
+	}
+
 	return res;
 }
 

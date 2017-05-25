@@ -135,11 +135,14 @@ dico_t* creationDicoPlein(){
 	return(dictio);
 }
 
+void rechercheFromMotifDicoPlein(dico_t * dico, char * motif){
+	printf("Mots découlants de\n%s\n\n", motif);
+	printf("%s\n", rechercheFromMotif(dico,motif));
+}
 
 int main(){
 	dico_t * dictioP = creationDicoPlein();
 	dico_t * dictioV = creationDicoVide();
-	printf("ca va\n");
 
 	/*RechDicoExistant(dictioP);*/
 
@@ -155,11 +158,11 @@ int main(){
 
 	/*insertionFromFileFileVide(dictioP);*/
 
-	affichageDicoPlein(dictioP);
+	/*affichageDicoPlein(dictioP);*/
 
 	/*affichageDicoVide(dictioV);*/
 
-	printf("ca va toujours\n");
+	/*rechercheFromMotifDicoPlein(dictioP,"ab");*/
 
 	return 0;
 }

@@ -52,10 +52,12 @@ char * affichage(dico_t *);
  *
  *              RECHERCHEFROMMOTIF
  *
+ * Affiche les mots du dictionnaire possedant un motif
+ * donné
  *
  * --------------------------------------------------- */
 
-/*char * rechercheFromMotif(dico_t *, char *);*/
+char * rechercheFromMotif(dico_t *, char *);
 
 /* ---------------------------------------------------
  *
