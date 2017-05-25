@@ -127,7 +127,7 @@ dico_t* creationDicoPlein(){
 	frere6->frere = NULL;
 	frere6->fils = (dico_t *) malloc(sizeof(dico_t));
 
-	fils8 = (dico_t *) malloc(sizeof(dico_t));
+	fils8 = frere6->fils;
 	fils8->lettre = 'S';
 	fils8->frere = NULL;
 	fils8->fils = NULL;
@@ -155,7 +155,7 @@ int main(){
 
 	/*insertionFromFileFileVide(dictioP);*/
 
-	affichageDicoPlein(dictioP);
+	/*affichageDicoPlein(dictioP);*/
 
 	/*affichageDicoVide(dictioV);*/
 

@@ -65,25 +65,29 @@ void insertionFromFile(dico_t * dico, char * filename)
  * --------------------------------------------------- */
 
 char * affichage(dico_t * dico){
-	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
+	char * res = (char *)malloc(TAILLEMAXMOT*1000*sizeof(char));
 	dico_t * ptrDico = dico;
 	pile_t pile = init_pile(TAILLEMAXMOT);
-	res ="";
-	printf("debut aff\n");
 	while (!est_vide(pile) || ptrDico!=NULL) {
-		printf("boucle1\n");
 		while (ptrDico->fils != NULL) {
-			printf("boucle2\n");
-			printf("%c\n", ptrDico->lettre);
 			empiler(&pile, (valeur_t)ptrDico);
+			if (ptrDico->lettre >='A' && ptrDico->lettre <='Z') {/*Si c'est une majuscule*/
+				res = strcat(res, pileToMot(&pile));
+				res = strcat(res, "\n");
+			}
 			ptrDico = ptrDico->fils;
 		}
-		printf("sortieboucle\n");
+		empiler(&pile, (valeur_t)ptrDico);
 		res = strcat(res, pileToMot(&pile));
-		printf("%s\n", res);
-		while (ptrDico == NULL && !est_vide(pile)){
-			printf("boucle3\n");
+		res = strcat(res, "\n");
+
+		while (ptrDico->frere == NULL && !est_vide(pile)){
 			depiler(&pile,(struct dico_t **)&ptrDico);
+		}
+		if (ptrDico->frere != NULL){
+			ptrDico = ptrDico->frere;
+		}else{
+			ptrDico = NULL;
 		}
 	}
 

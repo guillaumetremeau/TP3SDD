@@ -141,24 +141,23 @@ int depiler(pile_t * p,valeur_t * v){
 
 
 char * pileToMot(pile_t * pile){
-	char * res = "";
-	int i = 0;
-  size_t t;
+	char * res = (char *)malloc(TAILLEMAXMOT*sizeof(char));
+	int i;
+  int t;
 	dico_t * dico;
+  i = 0;
+  /*res = "";*/
 	if(!(est_vide(*pile))){
 		/* Parcours de la pile */
-		while (i <= pile->taille){
+		while (i <= pile->curseur){
 			dico =(dico_t *) pile->valeurs[i];
-			printf("%d",(int)strlen(&dico->lettre));
-			scanf("%s",res);
-			t = strlen(res);
-			res[t+1] ='\0';
-			res[t] = &dico->lettre;
+			t = (int)strlen(res);
+			res[t] = dico->lettre;
 			/*res = strcat(res, &dico->lettre);*/
-			printf("%s",res);
-			scanf("%s",res);
-			i++;
+			i = i+1;
 		}
+    t = (int)strlen(res);
+    res[t+1] ='\0';
 
 		/* Inversion de res  (inutile)
 		for(i = 0; i< strlen(res)/2; i++){
@@ -168,7 +167,6 @@ char * pileToMot(pile_t * pile){
 		}*/
 
 		/* Fin du mot */
-		res = strcat(res,"\n");
 	}
 	return res;
 }
