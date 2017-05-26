@@ -4,57 +4,25 @@
 #include "rech.h"
 #include "pile.h"
 
-dico_t* creationDicoPlein();
-dico_t* creationDicoVide();
 
 
-void affichageDicoPlein(dico_t * dictio){
-	printf("%s\n", affichage(dictio));
-}
 
-void affichageDicoVide(dico_t * dictio){
-	printf("%s\n", affichage(dictio));
-}
 
-void insertionFromFileFileVide(dico_t * dictio){
-	insertionFromFile(dictio, "dico.txt");
-	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-}
 
-void insertionFromFileDicoVide(dico_t * dictio){
-	insertionFromFile(dictio, "dico.txt");
-	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-}
 
-void insertionFromFileDicoPlein(dico_t * dictio){
-	insertionFromFile(dictio, "dico.txt");
-	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-}
 
-void insertionMotDicoExistant(dico_t * dictio){
-	insertionMot(dictio, "abba");
-	printf("%c%c%c%c\n", dictio->lettre, dictio->fils->lettre, dictio->fils->fils->frere->lettre, dictio->fils->fils->frere->fils->lettre);
-}
 
-void RechDicoExistant(dico_t * dictio){
-	int i = 0;
-	char * mot = "abi";
-	dico_t ** res = Recherche(dictio, mot, &i);
-	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
-}
 
-void RechDicoVide(dico_t * dictio){
-	int i = 0;
-	char * mot = "abi";
-	dico_t ** res = Recherche(dictio, mot, &i);
-	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
-}
+
+
+
+
+
+
+
 
 dico_t * creationDicoVide(){
-	dico_t * dictio = (dico_t *) malloc(sizeof(dico_t));
-	dictio->lettre = 'a';
-	dictio->frere = NULL;
-	dictio->fils = NULL;
+	dico_t * dictio = NULL;
 
 	return dictio;
 }
@@ -135,7 +103,71 @@ dico_t* creationDicoPlein(){
 	return(dictio);
 }
 
+void rechDicoPlein(dico_t * dictio){
+	printf("Recherche dans un dictionnaire plein du mot 'abi'\n");
+	int i = 0;
+	char * mot = "abi";
+	dico_t ** res = Recherche(dictio, mot, &i);
+	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
+}
+
+void rechDicoVide(dico_t * dictio){
+	printf("Recherche dans un dictionnaire vide du mot 'abi'\n");
+	int i = 0;
+	char * mot = "abi";
+	dico_t ** res = Recherche(dictio, mot, &i);
+	printf("Le mot %s va etre inserer apres la letre %c\n", mot, (*res)->lettre);
+}
+
+void insertionMotDicoPlein(dico_t * dictio){
+	printf("Insertion du mot 'abba' dans un dictionnaire plein\n");
+	insertionMot(dictio, "abba");
+}
+
+void insertionMotDicoVide(dico_t * dictio){
+	printf("Insertion du mot 'abba' dans un dictionnaire vide\n");
+	insertionMot(dictio, "abba");
+}
+
+void insertionFromFileDicoPlein(dico_t * dictio){
+	printf("Insertion de mots depuis un fichier dans un dictionnaire plein\n");
+	insertionFromFile(dictio, "dico.txt");
+}
+
+void insertionFromFileDicoVide(dico_t * dictio){
+	printf("Insertion de mots depuis un fichier dans un dictionnaire vide\n");
+	insertionFromFile(dictio, "dico.txt");
+}
+
+void insertionFromFileFileVide(dico_t * dictio){
+	printf("Insertion de mots depuis un fichier vide\n");
+	insertionFromFile(dictio, "dico_vide.txt");
+}
+
+void affichageDicoPlein(dico_t * dictio){
+	printf("Affichage d'un dictionnaire plein\n");
+	printf("%s\n", affichage(dictio));
+}
+
+void affichageDicoVide(dico_t * dictio){
+	printf("Affichage d'un dictionnaire vide\n");
+	printf("%s\n", affichage(dictio));
+}
+
 void rechercheFromMotifDicoPlein(dico_t * dico, char * motif){
+	printf("Recherche d'un motif dans un dictionnaire plein\n");
+	printf("Mots découlants de\n%s\n\n", motif);
+	printf("%s\n", rechercheFromMotif(dico,motif));
+}
+
+void rechercheFromMotifDicoVide(dico_t * dico, char * motif){
+	printf("Recherche d'un motif dans un dictionnaire vide\n");
+	printf("Mots découlants de\n%s\n\n", motif);
+	printf("%s\n", rechercheFromMotif(dico,motif));
+}
+
+void rechercheFromMotifMotifVide(dico_t * dico, char * motif){
+	printf("Recherche d'un motif vide dans un dictionnaire plein\n");
 	printf("Mots découlants de\n%s\n\n", motif);
 	printf("%s\n", rechercheFromMotif(dico,motif));
 }
@@ -144,17 +176,19 @@ int main(){
 	dico_t * dictioP = creationDicoPlein();
 	dico_t * dictioV = creationDicoVide();
 
-	/*RechDicoExistant(dictioP);*/
+	/*affichageDicoPlein(dictioP);*/
 
-	/*RechDicoVide(dictioV);*/
+	/*rechDicoPlein(dictioP);*/
 
-	/*insertionMotDicoExistant(dictioP);*/
+	/*rechDicoVide(dictioV);	seg fault*/ 
 
-	/*insertionMotDicoVide(dictioV);*/
+	/*insertionMotDicoPlein(dictioP);*/
+
+	/*insertionMotDicoVide(dictioV);	seg fault*/
 
 	/*insertionFromFileDicoPlein(dictioP);*/
 
-	/*insertionFromFileDicoVide(dictioV);*/
+	/*insertionFromFileDicoVide(dictioV);		seg fault*/
 
 	/*insertionFromFileFileVide(dictioP);*/
 
@@ -163,6 +197,10 @@ int main(){
 	/*affichageDicoVide(dictioV);*/
 
 	/*rechercheFromMotifDicoPlein(dictioP,"ab");*/
+
+	/*rechercheFromMotifDicoVide(dictioV,"ab");	seg fault*/
+
+	/*rechercheFromMotifMotifVide(dictioP,"");	seg fault*/
 
 	return 0;
 }

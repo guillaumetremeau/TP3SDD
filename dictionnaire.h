@@ -28,6 +28,7 @@ typedef struct dico{
 
 void insertionFromFile(dico_t *, char *);
 
+
 /* ---------------------------------------------------
  *
  *              INSERTIONMOT
@@ -38,26 +39,6 @@ void insertionFromFile(dico_t *, char *);
 
 void insertionMot(dico_t *, char *);
 
-/* ---------------------------------------------------
- *
- *              AFFICHAGE
- *
- * Affiche la liste des mots contenus dans un dictionnaire
- * --------------------------------------------------- */
-
-char * affichage(dico_t *);
-
-
-/* ---------------------------------------------------
- *
- *              RECHERCHEFROMMOTIF
- *
- * Affiche les mots du dictionnaire possedant un motif
- * donné
- *
- * --------------------------------------------------- */
-
-char * rechercheFromMotif(dico_t *, char *);
 
 /* ---------------------------------------------------
  *
@@ -75,5 +56,27 @@ char * rechercheFromMotif(dico_t *, char *);
  * --------------------------------------------------- */
 
 dico_t ** Recherche(dico_t *, char *, int *);
+
+
+/* ---------------------------------------------------
+ *
+ *              RECHERCHEFROMMOTIF
+ *
+ * Affiche les mots du dictionnaire possedant un motif
+ * donné
+ *
+ * --------------------------------------------------- */
+
+char * rechercheFromMotif(dico_t *, char *);
+
+/* ---------------------------------------------------
+ *
+ *              AFFICHAGE
+ *
+ * Affiche la liste des mots contenus dans un dictionnaire
+ * --------------------------------------------------- */
+
+char * affichage(dico_t *);
+
 
 #endif

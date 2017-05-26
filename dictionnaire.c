@@ -5,6 +5,7 @@
 #include "pile.h"
 
 
+
 /* ---------------------------------------------------
  *
  *              INSERTIONFROMFILE
@@ -49,63 +50,17 @@ void insertionFromFile(dico_t * dico, char * filename)
 }
 
 
-/* ---------------------------------------------------
- *
- *              AFFICHAGE
- *
- * Affiche la liste des mots contenus dans un dictionnaire
- *
- * Lexique :
- *  - res : Chaine à retourner
- *  - ptrDico : Pointeur sur l'élément courant du dico
- *  - pile : pile d'élément de l'arbre
- *
- * Retour : Chaine de caractère contenant la liste des mots
- *  -
- * --------------------------------------------------- */
-
-char * affichage(dico_t * dico){
-	char * res = (char *)malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
-	dico_t * ptrDico = dico;
-	pile_t pile = init_pile(TAILLEMAXMOT);
-	while (!est_vide(pile) || ptrDico!=NULL) {/*On parcours tant qu'il reste des mots à parcourir dans le dictionnaire */
-		while (ptrDico->fils != NULL) {
-			empiler(&pile, (valeur_t)ptrDico);
-			if (ptrDico->lettre >='A' && ptrDico->lettre <='Z') {/*Si c'est une majuscule on écrit le mot */
-				res = strcat(res, pileToMot(&pile));
-				res = strcat(res, "\n");
-			}
-			ptrDico = ptrDico->fils;
-		}
-		empiler(&pile, (valeur_t)ptrDico);/* On oubli pas de traiter le dernier fils d'une branche de l'arbre */
-		res = strcat(res, pileToMot(&pile));
-		res = strcat(res, "\n");
-
-		while (ptrDico->frere == NULL && !est_vide(pile)){/* On dépile jusqu'à retrouver un frêre */
-			depiler(&pile,(struct dico_t **)&ptrDico);
-		}
-		if (ptrDico->frere != NULL){ /*Si un frere est retrouvé, on continue le parcours à partir de lui */
-			ptrDico = ptrDico->frere;
-		}else{
-			ptrDico = NULL;
-		}
-	}
-
-	free_pile(&pile);
-	return res;
-}
-
 
 /* ---------------------------------------------------
  *
  *              INSERTIONMOT
  *
- * Insert un mot entré en paramètre dans le dictionnaire
+ * Insère un mot entré en paramètre dans le dictionnaire
  *
  * Lexique :
  *  - dico : dictionnaire
  *  - mot : mot à insérer
- *  - taille :
+ *  - taille
  *
  * --------------------------------------------------- */
 
@@ -136,35 +91,6 @@ void insertionMot(dico_t * dico, char * mot)			/*probleme avec premiere lettre*/
 	}
 }
 
-/* ---------------------------------------------------
- *
- *              RECHERCHEFROMMOTIF
- *
- * Affiche les mots du dictionnaire possedant un motif
- * donné
- *
- * Lexique :
- *  - res : chaine contenant le résultat de l'affichage
- *  basé sur le motif
- *  - i : indication de taille pour la recherche
- *  - ptrDico : pointeur  sur le dictionnaire
- *  - resRec : résultat de la recherche du motif
- *
- * Retour :
- *  - res
- * --------------------------------------------------- */
-
-char * rechercheFromMotif(dico_t * dico, char * motif){
-	char* res = (char *) malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
-	int i = 0;
-	dico_t * ptrDico = dico;
-	dico_t ** resRec = Recherche(ptrDico, motif, &i);
-	if ((*resRec)->fils != NULL) {
-		res = affichage((*resRec)->fils);
-	}
-
-	return res;
-}
 
 
 /* ---------------------------------------------------
@@ -215,6 +141,86 @@ dico_t** Recherche(dico_t * dico, char* mot, int * taille)
 	}
 	*taille = i;
 	return prec;
+}
+
+
+
+/* ---------------------------------------------------
+ *
+ *              RECHERCHEFROMMOTIF
+ *
+ * Affiche les mots du dictionnaire possedant un motif
+ * donné
+ *
+ * Lexique :
+ *  - res : chaine contenant le résultat de l'affichage
+ *  basé sur le motif
+ *  - i : indication de taille pour la recherche
+ *  - ptrDico : pointeur  sur le dictionnaire
+ *  - resRec : résultat de la recherche du motif
+ *
+ * Retour :
+ *  - res
+ * --------------------------------------------------- */
+
+char * rechercheFromMotif(dico_t * dico, char * motif){
+	char* res = (char *) malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
+	int i = 0;
+	dico_t * ptrDico = dico;
+	dico_t ** resRec = Recherche(ptrDico, motif, &i);
+	if ((*resRec)->fils != NULL) {
+		res = affichage((*resRec)->fils);
+	}
+
+	return res;
+}
+
+
+
+/* ---------------------------------------------------
+ *
+ *              AFFICHAGE
+ *
+ * Affiche la liste des mots contenus dans un dictionnaire
+ *
+ * Lexique :
+ *  - res : Chaine à retourner
+ *  - ptrDico : Pointeur sur l'élément courant du dico
+ *  - pile : pile d'élément de l'arbre
+ *
+ * Retour : 
+ *  -res : Chaine de caractère contenant la liste des mots
+ * --------------------------------------------------- */
+
+char * affichage(dico_t * dico){
+	char * res = (char *)malloc(TAILLEMAXMOT*TAILLEMAXDICO*sizeof(char));
+	dico_t * ptrDico = dico;
+	pile_t pile = init_pile(TAILLEMAXMOT);
+	while (!est_vide(pile) || ptrDico!=NULL) {/*On parcours tant qu'il reste des mots à parcourir dans le dictionnaire */
+		while (ptrDico->fils != NULL) {
+			empiler(&pile, (valeur_t)ptrDico);
+			if (ptrDico->lettre >='A' && ptrDico->lettre <='Z') {/*Si c'est une majuscule on écrit le mot */
+				res = strcat(res, pileToMot(&pile));
+				res = strcat(res, "\n");
+			}
+			ptrDico = ptrDico->fils;
+		}
+		empiler(&pile, (valeur_t)ptrDico);/* On oubli pas de traiter le dernier fils d'une branche de l'arbre */
+		res = strcat(res, pileToMot(&pile));
+		res = strcat(res, "\n");
+
+		while (ptrDico->frere == NULL && !est_vide(pile)){/* On dépile jusqu'à retrouver un frêre */
+			depiler(&pile,(struct dico_t **)&ptrDico);
+		}
+		if (ptrDico->frere != NULL){ /*Si un frere est retrouvé, on continue le parcours à partir de lui */
+			ptrDico = ptrDico->frere;
+		}else{
+			ptrDico = NULL;
+		}
+	}
+
+	free_pile(&pile);
+	return res;
 }
 
 
